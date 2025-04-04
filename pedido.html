@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta Encantada</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <img src="https://i.gifer.com/nRm.gif" class="gatinhos g1" alt="Gatinho 1">
+    <img src="https://i.gifer.com/nRm.gif" class="gatinhos g2" alt="Gatinho 2">
+    <img src="https://i.gifer.com/nRm.gif" class="gatinhos g3" alt="Gatinho 3">
+    <img src="https://i.gifer.com/nRm.gif" class="gatinhos g4" alt="Gatinho 4">
+    <div class="container">
+        <img src="IK6W.gif" 
+             alt="Taylor Swift" 
+             class="taylor-gif">            
+        <h2 class="titulo">Você aceita namorar comigo?</h2>      
+        <button class="btn" id="sim">SIM! 🥰</button>
+        <button class="btn" id="nao">Não 😢</button>
+        <div id="mensagem"></div>
+        <div id="poesia"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script>
+        const mensagensTristes = [
+            "Por que está fugindo de mim? 😢",
+            "Será que sou tão ruim assim? 😞",
+            "Não acredito que vai me rejeitar... 🥺",
+            "Você vai se arrepender disso! 😭",
+            "Meu coração está partido... 💔",
+            "Nem um chancezinha? 😭",
+            "Você é cruel... 😤",
+            "Isso é tão injusto! 😣"
+        ];
+        let tentativas = 0;
+        const btnNao = document.getElementById('nao');
+        const btnSim = document.getElementById('sim');
+        const container = document.querySelector('.container');
+        let audioIniciado = false;
+        // Sistema de áudio com tratamento de erros
+        const suspense = new Howl({
+            src: ['suspense.mp3'],
+            loop: true,
+            volume: 0.5,
+            html5: true,
+            onloaderror: () => alert('Erro ao carregar suspense.mp3'),
+            onplayerror: () => alert('Erro ao reproduzir suspense.mp3')
+        });
+        const daylight = new Howl({
+            src: ['Daylight.mp3'],
+            loop: true,
+            volume: 0.5,
+            html5: true,
+            onloaderror: () => alert('Erro ao carregar Daylight.mp3'),
+            onplayerror: () => alert('Erro ao reproduzir Daylight.mp3')
+        });
+        // Força início do áudio após interação
+        document.body.addEventListener('click', () => {
+            if(!audioIniciado) {
+                suspense.play();
+                audioIniciado = true;
+            }
+        });
+        // Movimentação do botão Não
+        function moverBotao() {
+            const x = Math.random() * (container.offsetWidth - btnNao.offsetWidth);
+            const y = Math.random() * (container.offsetHeight - btnNao.offsetHeight);
+       
+            btnNao.style.position = 'absolute';
+            btnNao.style.left = `${x}px`;
+            btnNao.style.top = `${y}px`;
+        }
+        // Evento do botão Não
+        btnNao.addEventListener('mouseover', () => {
+            if(tentativas < mensagensTristes.length) {
+                // Mostra mensagem
+                const mensagemDiv = document.getElementById('mensagem');
+                mensagemDiv.innerHTML = `<div class="mensagem">${mensagensTristes[tentativas]}</div>`;            
+                // Move botão
+                moverBotao();
+                tentativas++;
+            } else {
+                // Remove botões
+                btnSim.remove();
+                btnNao.remove();               
+                // Cria elementos finais
+                const mensagem = document.createElement('div');
+                mensagem.className = 'mensagem-triste';
+                mensagem.innerHTML = "Tudo bem... você venceu essa batalha 😢<br>Mas não desista de mim...";
+                
+                const btnSair = document.createElement('button');
+                btnSair.className = 'btn';
+                btnSair.textContent = 'Sair';
+                btnSair.style.marginTop = '20px';
+                btnSair.onclick = () => {
+                    // Transição de música
+                    suspense.fade(0.5, 0, 2000);
+                    daylight.volume(0.5);
+                    daylight.play();
+                    setTimeout(() => suspense.stop(), 2000);
+                    mensagem.remove();
+                    btnSair.remove();
+                    aceitar();
+                };               
+                container.appendChild(mensagem);
+                container.appendChild(btnSair);
+            }
+        });
+        // Evento do botão Sim
+        btnSim.addEventListener('click', () => {
+            // Transição de música
+            suspense.fade(0.5, 0, 2000);
+            daylight.volume(0.5);
+            daylight.play();
+            setTimeout(() => suspense.stop(), 2000);
+            btnSim.remove();
+            btnNao.remove();
+            aceitar();
+        });
+       // Função principal
+        function aceitar() {
+            document.querySelector('.titulo').style.display = 'none';
+            document.getElementById('mensagem').innerHTML = '';
+            document.querySelector('.taylor-gif').style.display = 'none';
+            const nome = prompt('🎉 Parabéns! \n\nQual é o seu nome, meu amor?');            
+            if(nome) {
+                confetti({
+                    particleCount: 200,
+                    spread: 100,
+                    origin: { y: 0.6 },
+                    colors: ['#E84393', '#FFD700', '#6C5CE7']		   
+                });
+                document.getElementById('poesia').innerHTML = `
+                    <div class="poema-container">
+                        <img src="helo-e-eu.gif" 
+                            alt="HeloeEu-Gif" 
+                            class="heloeEu-Gif"> 
+                        <h2>${nome}, nosso romance será assim:</h2>
+                        <pre class="poema">
+Nosso romance será estilo Folklore,
+Com momentos dignos de Fearless,
+Vamos dançar como em 1989,
+E viver um final Red de amor.
+
+Cada dia será um novo Reputation,
+Nosso lar terá o calor de Lover,
+E mesmo nos momentos Evermore,
+Você será meu Daylight a brilhar! ✨
+                        </pre>
+                        <div class="assinatura">~ Seu amor eterno 💖</div>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+:root {
+    --cor-primaria: #E84393;
+    --cor-secundaria: #FFD700;
+    --cor-terciaria: #6C5CE7;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ffe6f0, #e6f0ff);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.gifer.com/2iFb.gif') repeat;
+    opacity: 0.3;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 25px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.15);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    border: 2px solid var(--cor-primaria);
+    animation: flutuar 3s ease-in-out infinite;
+    z-index: 2;
+}
+
+.btn {
+    background: linear-gradient(135deg, var(--cor-primaria), var(--cor-terciaria));
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    margin: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1.1em;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--cor-primaria);
+}
+
+.taylor-gif {
+    width: 250px;
+    margin: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    animation: flutuar 3s ease-in-out infinite;
+}
+.heloeEu-Gif{
+    width: 250px;
+    margin: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    animation: flutuar 3s ease-in-out infinite;
+}
+
+.gatinhos {
+    position: absolute;
+    width: 80px;
+    animation: girar 5s linear infinite;
+    pointer-events: none;
+}
+
+.g1 { top: 10px; right: 10px; }
+.g2 { bottom: 10px; left: 10px; }
+.g3 { top: 10px; left: 10px; }
+.g4 { bottom: 10px; right: 10px; }
+
+@keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes girar {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.mensagem {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FFEBEE;
+    color: #C62828;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.5em;
+    font-weight: bold;
+    white-space: nowrap;
+    animation: aparecer 0.3s ease-out;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.mensagem-triste {
+    color: #FF6B6B;
+    font-size: 1.5em;
+    margin: 20px;
+    animation: piscar 2s infinite;
+}
+
+.poema-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff5f5;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.assinatura {
+    margin-top: 15px;
+    font-style: italic;
+    color: var(--cor-primaria);
+}
